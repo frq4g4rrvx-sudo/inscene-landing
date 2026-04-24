@@ -1,142 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>inscene.io | AI Stock Footage Discovery</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-body { background-color: #000; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-.pulsate-bg {
-background: radial-gradient(circle at center, #001a4d 0%, #000 80%);
-animation: pulse 12s infinite ease-in-out;
-position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-}
-@keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
-.glass-panel {
-background: rgba(15, 23, 42, 0.8);
-backdrop-filter: blur(24px);
--webkit-backdrop-filter: blur(24px);
-border: 1px solid rgba(51, 65, 85, 0.3);
-}
-.protected-content { user-select: none; -webkit-user-select: none; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inscene.io | AI-Driven Stock Footage Discovery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #000; overflow-x: hidden; }
+      .pulsate-bg {
+            background: radial-gradient(circle at center, #001a4d 0%, #000 70%);
+            animation: pulse 8s infinite ease-in-out;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+      .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+    </style>
 </head>
-<body class="text-slate-300 font-sans selection:bg-blue-500/30">
+<body class="text-slate-200 font-sans selection:bg-blue-500/30">
 
-<div class="pulsate-bg"></div>
+    <div class="pulsate-bg"></div>
 
-<nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center relative z-20">
-<a href="/" class="text-xl font-black tracking-tighter text-white">inscene<span class="text-blue-500">.io</span></a>
-<div class="flex items-center gap-6">
-<a href="/team" class="text-[10px] uppercase tracking-widest text-slate-400 hover:text-white font-bold transition-all">Team</a>
-<button onclick="toggleModal()" class="text-[10px] uppercase tracking-widest text-blue-400 font-bold border border-blue-500/50 px-4 py-1.5 rounded-full hover:bg-blue-500/20 transition-all">
-Whitepaper
-</button>
-</div>
-</nav>
+    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
+        <div class="text-2xl font-black tracking-tighter text-white">inscene<span class="text-blue-500">.io</span></div>
+        <div class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-3 py-1 rounded-full">
+            2026 Tech Architecture
+        </div>
+    </nav>
 
-<main class="max-w-5xl mx-auto px-6 pt-10 pb-20 text-center relative z-10">
-<div class="mb-6">
-<h2 class="text-white text-xl md:text-2xl font-medium mb-1">Narrative-First</h2>
-<h1 class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent text-4xl md:text-6xl font-black uppercase tracking-tight">
-Stock Footage Discovery
-</h1>
-</div>
+    <main class="max-w-4xl mx-auto px-6 py-20 text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+            Narrative-First <br/><span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent text-4xl md:text-6xl">Stock Footage Discovery</span>
+        </h1>
+        <p class="text-lg text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Stop searching with keywords. Start finding cinematic shots with intent. Our <strong>NARRABENCH framework</strong> uses deep reasoning to retrieve the exact shots your story demands.
+        </p>
 
-<p class="text-sm md:text-base text-slate-400 mb-10 max-w-xl mx-auto leading-relaxed">
-Stop searching with keywords. Find cinematic clips with intent. <br/>Grounded in logic via the <strong>NARRABENCH Framework</strong>.
-</p>
+        <div class="glass-panel p-2 rounded-2xl max-w-md mx-auto shadow-2xl">
+            <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col md:flex-row gap-2">
+                <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
+                <input type="hidden" name="subject" value="New Beta Signup for inscene.io">
+                
+                <input type="email" name="email" required placeholder="your@email.com" 
+                    class="bg-slate-900/50 border border-slate-700 px-5 py-4 rounded-xl focus:outline-none focus:border-blue-500 w-full text-white">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-all whitespace-nowrap">
+                    Join Beta
+                </button>
+            </form>
+        </div>
+        <p class="text-xs text-slate-500 mt-4 italic">Limited spots available for Q3 2026 closed testing.</p>
+    </main>
 
-<div class="glass-panel p-1 rounded-xl max-w-sm mx-auto shadow-2xl mb-24">
-<form action="https://api.web3forms.com/submit" method="POST" class="flex flex-row gap-1">
-<input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
-<input type="email" name="email" required placeholder="your@email.com" class="bg-transparent px-4 py-2 rounded-lg focus:outline-none w-full text-white text-xs">
-<button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2 rounded-lg transition-all text-xs whitespace-nowrap">Join Beta</button>
-</form>
-</div>
+    <section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8">
+        <div class="glass-panel p-8 rounded-3xl">
+            <div class="text-blue-500 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Paragraph-as-Thought</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across libraries.[1, 2]</p>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+            <div class="text-blue-500 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">XAI Logic Receipts</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates.[1, 3]</p>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+            <div class="text-blue-500 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Reasoning-Rebuttal</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly.[1, 4]</p>
+        </div>
+    </section>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-<div class="glass-panel p-6 rounded-2xl">
-<div class="text-blue-500 mb-4">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-</div>
-<h3 class="text-white font-bold mb-2">Paragraph-as-Thought</h3>
-<p class="text-[11px] text-slate-400 leading-relaxed">Decomposing prose into 12 narrative dimensions to find specific stock clips across libraries.[1, 2]</p>
-</div>
-<div class="glass-panel p-6 rounded-2xl">
-<div class="text-blue-500 mb-4">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-</div>
-<h3 class="text-white font-bold mb-2">XAI Logic Receipts</h3>
-<p class="text-[11px] text-slate-400 leading-relaxed">Every match explained with Schankian Primitives (PTRANS, ATRANS) for 100% auditability.[1, 3]</p>
-</div>
-<div class="glass-panel p-6 rounded-2xl">
-<div class="text-blue-500 mb-4">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-</div>
-<h3 class="text-white font-bold mb-2">Reasoning-Rebuttal</h3>
-<p class="text-[11px] text-slate-400 leading-relaxed">Refine footage searches instantly by rebutting the AI's internal logic state in real-time.[1, 4]</p>
-</div>
-</div>
-</main>
+    <footer class="py-12 px-6 text-center border-t border-slate-900">
+        <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
+    </footer>
 
-<div id="gateModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md">
-<div class="glass-panel w-full max-w-lg max-h-[90vh] overflow-hidden rounded-3xl flex flex-col">
-<div class="p-6 border-b border-slate-800 flex justify-between items-center">
-<h2 class="text-lg font-bold text-white">Whitepaper Request</h2>
-<button onclick="toggleModal()" class="text-slate-500 hover:text-white text-2xl">&times;</button>
-</div>
-<div id="gateForm" class="p-10 text-center">
-<p class="text-slate-400 mb-6 text-sm">Verification required for proprietary architecture.</p>
-<form id="ajaxForm" class="space-y-3">
-<input type="hidden" name="access_key" value="e1dfdefc-8601-41e0-9abf-b38814bd6205">
-<input type="text" name="name" required placeholder="Full Name" class="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl outline-none text-white text-sm">
-<input type="email" name="email" required placeholder="Work Email" class="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl outline-none text-white text-sm">
-<button type="submit" class="w-full bg-blue-600 p-3 rounded-xl font-bold text-white text-sm">View Whitepaper</button>
-</form>
-</div>
-<div id="briefingContent" class="hidden overflow-y-auto p-8 protected-content text-slate-300 leading-relaxed space-y-6 text-xs" oncontextmenu="return false;">
-<h1 class="text-lg font-bold text-white uppercase">Strategic Architecture: inscene.io</h1>
-<p>Retrieval matches are Explained via <strong>Schankian Primitives</strong> (PTRANS, ATRANS), providing a human-readable audit trail.[1, 3]</p>
-<div class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-emerald-400 font-mono space-y-2">
-<p>C = (Sum(S * w_N) / n) * (L / 4)</p>
-<p>R = ((S * w_S) + (V * w_V)) / F_Redundancy</p>
-</div>
-<p class="italic text-slate-500 tracking-tight text-[10px]">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13.</p>
-</div>
-</div>
-</div>
-
-<script>
-function toggleModal() {
-const m = document.getElementById('gateModal');
-m.classList.toggle('hidden');
-}
-
-document.getElementById('ajaxForm').addEventListener('submit', async function(e) {
-e.preventDefault();
-const btn = e.target.querySelector('button');
-btn.innerHTML = "Verifying...";
-btn.disabled = true;
-
-const response = await fetch("https://api.web3forms.com/submit", {
-method: "POST",
-headers: { "Content-Type": "application/json", Accept: "application/json" },
-body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
-});
-const result = await response.json();
-if (result.success) {
-document.getElementById('gateForm').classList.add('hidden');
-document.getElementById('briefingContent').classList.remove('hidden');
-} else {
-alert("Verification Failed: " + (result.message |
-
-| "Check your key activation."));
-btn.innerHTML = "View Whitepaper";
-btn.disabled = false;
-}
-});
-</script>
 </body>
 </html>
