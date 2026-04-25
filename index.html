@@ -28,7 +28,6 @@
    .uncopyable {
             -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
         }
-    /* Custom Scrollbar for Infinite Viewer */
     #scroll-container::-webkit-scrollbar { width: 4px; }
     #scroll-container::-webkit-scrollbar-track { background: transparent; }
     #scroll-container::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
@@ -63,7 +62,6 @@
             <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col md:flex-row gap-2">
                 <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
                 <input type="hidden" name="subject" value="New Beta Signup for inscene.io">
-                
                 <input type="email" name="email" required placeholder="your@email.com" 
                     class="bg-slate-900/50 border border-slate-700 px-5 py-4 rounded-xl focus:outline-none focus:border-blue-500 w-full text-white">
                 <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-all whitespace-nowrap">
@@ -113,9 +111,9 @@
                 <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Strategic Whitepaper</h2>
                 <p class="text-sm text-slate-400 mb-8 leading-relaxed">Enter your details to unlock the 2026 architecture preview `[1]`.</p>
                 
-                <form onsubmit="handleWhitepaperSubmit(event)" class="space-y-4 max-w-sm mx-auto">
+                <form id="gate-form" onsubmit="handleWhitepaperSubmit(event)" class="space-y-4 max-w-sm mx-auto">
                     <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
-                    <input type="hidden" name="subject" value="Gated Whitepaper Access Request - inscene.io">
+                    <input type="hidden" name="subject" value="Whitepaper Access - inscene.io">
                     
                     <div class="space-y-2 text-left">
                         <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Full Name</label>
@@ -142,37 +140,37 @@
                     
                     <section>
                         <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">1. Executive Summary</h4>
-                        <p>inscene.io is a category-disrupting AI curator for the global stock footage industry `[1]`. It replaces fragmented keyword-based search with a Narrative Thought Engine. By utilizing a "Paragraph-to-Shot" discovery interface and a unique Reasoning-Rebuttal Loop, the platform provides a high-utility collaborative workflow for professional editors while maintaining a zero-liability profile as a non-hosting intermediary `[1]`.</p>
+                        <p>inscene.io is a category-disrupting AI curator for the global stock footage industry. It replaces fragmented keyword-based search with a Narrative Thought Engine. By utilizing a "Paragraph-to-Shot" discovery interface and a unique Reasoning-Rebuttal Loop, the platform provides a high-utility collaborative workflow for professional editors while maintaining a zero-liability profile as a non-hosting intermediary `[1]`.</p>
                     </section>
 
                     <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">2. AI-First Discovery: Paragraph-as-Thought</h4>
-                        <p>Unlike traditional RAG systems that rely on flat vector similarity, inscene.io employs a Situation Modeling approach via the NARRABENCH framework. The engine decomposes paragraphs into twelve narrative features across four dimensions: Story (motivations), Narration (perspective), Discourse (chronological chains), and Situatedness (intent) `[1]`.</p>
+                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">2. AI-First Discovery Interface: Paragraph-as-Thought</h4>
+                        <p>The platform operates as a single-entry, narrative-driven discovery tool. Unlike traditional RAG systems that rely on flat vector similarity, inscene.io employs a Situation Modeling approach via the NARRABENCH framework. The engine decomposes the paragraph into twelve narrative features across four dimensions: Story (agent motivations), Narration (perspective), Discourse (chronological chains), and Situatedness (social intent) `[1]`.</p>
                     </section>
 
                     <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">3. Reasoning-Rebuttal Loop (XAI)</h4>
-                        <p>To meet the Explainable AI (XAI) mandates of 2026, every recommendation is accompanied by a "Logic Receipt" mapping input to Schankian Primitives (e.g., PTRANS for physical movement) `[1]`. Thought Signatures preserve the reasoning state without re-tokenizing the entire history during refinements `[1]`.</p>
+                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">3. The Reasoning-Rebuttal Loop (XAI)</h4>
+                        <p>To meet Explainable AI (XAI) mandates, inscene.io implements a bilateral discovery process powered by Gemini 3's reasoning phase. Logic Receipts explain the semantic match by mapping input to Schankian Primitives (e.g., physical movement or abstract transfers). Thought Signatures preserve the reasoning state to prevent "context amnesia" during refinements, satisfying Article 14 of the EU AI Act `[1]`.</p>
                     </section>
 
                     <section>
                         <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">4. Multi-Provider Orchestration (MCP)</h4>
-                        <p>Agentic workflows are managed via MCP servers, allowing for the registration of multiple provider endpoints (Shutterstock, Pond5, iStock) at initialization `[1]`. We adopt the IPTC Video Metadata Hub v1.7 to normalize data and distinguish between generative and traditional footage `[1]`.</p>
+                        <p>To maximize retrieval accuracy across fragmented global libraries, the platform utilizes a standardized integration layer. Agentic workflows are managed via Model Context Protocol (MCP) servers, allowing the registration of multiple provider endpoints (e.g., Shutterstock, Pond5) at initialization. We adopt the IPTC Video Metadata Hub v1.7 to normalize disparate data `[1]`.</p>
                     </section>
 
                     <section>
                         <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">5. The "Vault" Model & Security</h4>
-                        <p>Anonymized user rebuttals are stored in "The Vault"—a secure graph store preserving the causal logic of expert corrections `[1]`. Honeytoken security triggers an immediate session kill-switch if accessed by compromised agents. We offload 90% of routine compute to the edge using Gemma 4 `[1]`.</p>
+                        <p>To facilitate long-term improvement without "Black Box" risks, we utilize Audited Batch Learning (ABL). Anonymized user rebuttals are stored in "The Vault"—a secure graph store preserving the causal logic of expert corrections. The Vault is protected by Honeytoken Security patterns that trigger an immediate session kill-switch if accessed by a compromised agent `[1]`.</p>
                     </section>
 
                     <section>
                         <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">6. Marketplace Neutrality & Ranking</h4>
-                        <p>Our ranking formula prioritizes relevance and validation over affiliate yield `[1]`. The Redundancy Factor ($F_{Redundancy}$) acts as a guardrail preventing single-provider dominance `[1]`.</p>
+                        <p>Our ranking formula ensures results are prioritized by relevance ($S$) and professional validation ($V$), not affiliate commission. The Redundancy Factor ($F_{Redundancy}$) acts as a neutrality guardrail that prevents any single provider from dominating results `[1, 2]`.</p>
                     </section>
 
                     <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">7. Regulatory Alignment</h4>
-                        <p>Architecture compliant with EU AI Act (Art 12/13), FTC AI Policy (2026), and NIST AI RMF via Logic Receipts and Vault sanitization `[1]`.</p>
+                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">7. Revenue & Infrastructure Roadmap</h4>
+                        <p>The platform is designed for extreme economic sustainability, maintaining a sub-linear spend-to-revenue ratio. By routing 90% of traffic to local Gemma 4 models, we preserve margins while scaling to a capacity of 1.2 million daily queries by Year 5 `[1]`.</p>
                     </section>
 
                     <div class="py-20 text-center border-t border-slate-800">
@@ -192,7 +190,6 @@
             } else {
                 modal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-                // Reset to form view if closed
                 document.getElementById('wp-form-step').classList.remove('hidden');
                 document.getElementById('wp-reader-step').classList.add('hidden');
             }
@@ -203,27 +200,24 @@
             const form = event.target;
             const formData = new FormData(form);
 
-            // Web3Forms Backend Submission
             fetch("https://api.web3forms.com/submit", {
                 method: "POST",
                 body: formData
-            });
+            }).catch(err => console.log("Web3Forms submission backgrounded."));
 
-            // Frontend Access Grant
             document.getElementById('wp-form-step').classList.add('hidden');
             document.getElementById('wp-reader-step').classList.remove('hidden');
         }
 
-        // IP Protection Script
         const secureArea = document.getElementById('whitepaper-modal');
         secureArea.addEventListener('copy', (e) => e.preventDefault());
         secureArea.addEventListener('contextmenu', (e) => e.preventDefault());
         
         document.addEventListener('keydown', (e) => {
-            const isCommand = (e.ctrlKey |
+            const isCmd = (e.ctrlKey |
 
 | e.metaKey);
-            if (isCommand && (e.key === 'c' |
+            if (isCmd && (e.key === 'c' |
 
 | e.key === 'p' |
 | e.key === 's')) {
