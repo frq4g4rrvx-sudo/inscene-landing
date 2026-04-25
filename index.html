@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #000; overflow-x: hidden; }
-      .pulsate-bg {
+     .pulsate-bg {
             background: radial-gradient(circle at center, #001a4d 0%, #000 70%);
             animation: pulse 8s infinite ease-in-out;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
@@ -16,10 +16,14 @@
             0%, 100% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.1); }
         }
-      .glass-panel {
+     .glass-panel {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+     .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
         }
     </style>
 </head>
@@ -29,23 +33,29 @@
 
     <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
         <div class="text-2xl font-black tracking-tighter text-white">inscene<span class="text-blue-500">.io</span></div>
-        <div class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-3 py-1 rounded-full">
-            2026 Tech Architecture
+        <div class="flex gap-4 items-center">
+            <a href="/team" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-1 rounded-full hover:bg-slate-800 transition-all">
+                Team
+            </a>
+            <button onclick="toggleModal('whitepaper-modal', true)" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
+                Whitepaper
+            </button>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-20 text-center">
         <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Narrative-First <br/><span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent text-4xl md:text-6xl">Stock Footage Discovery</span>
+            Narrative-First <br/><span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent text-4xl md:text-6xl">Shot Discovery</span>
         </h1>
         <p class="text-lg text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Stop searching with keywords. Start finding cinematic shots with intent. Our <strong>NARRABENCH framework</strong> uses deep reasoning to retrieve the exact shots your story demands.
+            Stop searching with keywords. Start finding stock footage with intent.<br/>Our AI-powered <strong class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">NARRABENCH framework</strong> uses deep reasoning to retrieve the exact shots your story demands.
         </p>
 
         <div class="glass-panel p-2 rounded-2xl max-w-md mx-auto shadow-2xl">
             <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col md:flex-row gap-2">
                 <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
                 <input type="hidden" name="subject" value="New Beta Signup for inscene.io">
+                <input type="hidden" name="redirect" value="https://www.inscene.io/thanks.html">
                 
                 <input type="email" name="email" required placeholder="your@email.com" 
                     class="bg-slate-900/50 border border-slate-700 px-5 py-4 rounded-xl focus:outline-none focus:border-blue-500 w-full text-white">
@@ -63,21 +73,21 @@
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">Paragraph-as-Thought</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across libraries.[1, 2]</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across the biggest stock footage libraries.</p>
         </div>
         <div class="glass-panel p-8 rounded-3xl">
             <div class="text-blue-500 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">XAI Logic Receipts</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates.[1, 3]</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates.</p>
         </div>
         <div class="glass-panel p-8 rounded-3xl">
             <div class="text-blue-500 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">Reasoning-Rebuttal</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly.[1, 4]</p>
+            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly.</p>
         </div>
     </section>
 
@@ -85,5 +95,47 @@
         <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
     </footer>
 
+    <div id="whitepaper-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="glass-panel max-w-md w-full p-8 rounded-3xl relative shadow-2xl">
+            <button onclick="toggleModal('whitepaper-modal', false)" class="absolute top-4 right-4 text-slate-500 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h2 class="text-2xl font-bold text-white mb-2">Strategic Whitepaper</h2>
+            <p class="text-sm text-slate-400 mb-6 leading-relaxed">Enter your details to receive the 2026 strategic architecture directly in your inbox.</p>
+            
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
+                <input type="hidden" name="subject" value="Whitepaper Request from inscene.io">
+                <input type="hidden" name="redirect" value="https://www.inscene.io/thanks.html">
+                
+                <div class="space-y-2 text-left">
+                    <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Full Name</label>
+                    <input type="text" name="name" required placeholder="John Doe" 
+                        class="w-full bg-slate-900/50 border border-slate-700 px-5 py-3 rounded-xl focus:outline-none focus:border-blue-500 text-white">
+                </div>
+                <div class="space-y-2 text-left">
+                    <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Work Email</label>
+                    <input type="email" name="email" required placeholder="john@company.com" 
+                        class="w-full bg-slate-900/50 border border-slate-700 px-5 py-3 rounded-xl focus:outline-none focus:border-blue-500 text-white">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all mt-4">
+                    Get Access
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal(id, show) {
+            const modal = document.getElementById(id);
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
 </body>
 </html>
