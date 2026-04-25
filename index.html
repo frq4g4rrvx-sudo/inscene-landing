@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #000; overflow-x: hidden; }
-   .pulsate-bg {
+      .pulsate-bg {
             background: radial-gradient(circle at center, #001a4d 0%, #000 70%);
             animation: pulse 8s infinite ease-in-out;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
@@ -16,21 +16,11 @@
             0%, 100% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.1); }
         }
-   .glass-panel {
+      .glass-panel {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(51, 65, 85, 0.5);
         }
-   .modal-overlay {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-        }
-   .uncopyable {
-            -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
-        }
-    #scroll-container::-webkit-scrollbar { width: 4px; }
-    #scroll-container::-webkit-scrollbar-track { background: transparent; }
-    #scroll-container::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
     </style>
 </head>
 <body class="text-slate-200 font-sans selection:bg-blue-500/30">
@@ -39,13 +29,8 @@
 
     <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
         <div class="text-2xl font-black tracking-tighter text-white">inscene<span class="text-blue-500">.io</span></div>
-        <div class="flex gap-4 items-center">
-            <a href="team.html" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-1 rounded-full hover:bg-slate-800 transition-all">
-                Team
-            </a>
-            <button onclick="toggleModal('whitepaper-modal', true)" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
-                Whitepaper
-            </button>
+        <div class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-3 py-1 rounded-full">
+            2026 Tech Architecture
         </div>
     </nav>
 
@@ -54,14 +39,14 @@
             Narrative-First <br/><span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent text-4xl md:text-6xl">Stock Footage Discovery</span>
         </h1>
         <p class="text-lg text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Stop searching with keywords. Start finding cinematic shots with intent.<br/>
-            Our AI-powered <strong class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">NARRABENCH framework</strong> uses deep reasoning to retrieve the exact shots your story demands.
+            Stop searching with keywords. Start finding cinematic shots with intent. Our <strong>NARRABENCH framework</strong> uses deep reasoning to retrieve the exact shots your story demands.
         </p>
 
         <div class="glass-panel p-2 rounded-2xl max-w-md mx-auto shadow-2xl">
             <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col md:flex-row gap-2">
                 <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
                 <input type="hidden" name="subject" value="New Beta Signup for inscene.io">
+                
                 <input type="email" name="email" required placeholder="your@email.com" 
                     class="bg-slate-900/50 border border-slate-700 px-5 py-4 rounded-xl focus:outline-none focus:border-blue-500 w-full text-white">
                 <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-all whitespace-nowrap">
@@ -78,21 +63,21 @@
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">Paragraph-as-Thought</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across libraries `[1]`.</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across libraries.[1, 2]</p>
         </div>
         <div class="glass-panel p-8 rounded-3xl">
             <div class="text-blue-500 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">XAI Logic Receipts</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates `[1]`.</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates.[1, 3]</p>
         </div>
         <div class="glass-panel p-8 rounded-3xl">
             <div class="text-blue-500 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">Reasoning-Rebuttal</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly `[1]`.</p>
+            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly.[1, 4]</p>
         </div>
     </section>
 
@@ -100,130 +85,5 @@
         <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
     </footer>
 
-    <div id="whitepaper-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
-        <div class="glass-panel max-w-2xl w-full p-1 rounded-3xl relative shadow-2xl overflow-hidden">
-            
-            <button onclick="toggleModal('whitepaper-modal', false)" class="absolute top-6 right-6 z-50 text-slate-500 hover:text-white transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-
-            <div id="wp-form-step" class="p-10 text-center">
-                <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Strategic Whitepaper</h2>
-                <p class="text-sm text-slate-400 mb-8 leading-relaxed">Enter your details to unlock the 2026 architecture preview `[1]`.</p>
-                
-                <form id="gate-form" onsubmit="handleWhitepaperSubmit(event)" class="space-y-4 max-w-sm mx-auto">
-                    <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
-                    <input type="hidden" name="subject" value="Whitepaper Access - inscene.io">
-                    
-                    <div class="space-y-2 text-left">
-                        <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Full Name</label>
-                        <input type="text" name="name" required placeholder="John Doe" 
-                            class="w-full bg-slate-900/50 border border-slate-700 px-5 py-3 rounded-xl focus:outline-none focus:border-blue-500 text-white transition-all">
-                    </div>
-                    <div class="space-y-2 text-left">
-                        <label class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Work Email</label>
-                        <input type="email" name="email" required placeholder="john@company.com" 
-                            class="w-full bg-slate-900/50 border border-slate-700 px-5 py-3 rounded-xl focus:outline-none focus:border-blue-500 text-white transition-all">
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all mt-4 shadow-lg shadow-blue-600/20">
-                        Unlock Strategy
-                    </button>
-                </form>
-            </div>
-
-            <div id="wp-reader-step" class="hidden h-[75vh] flex flex-col">
-                <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/40">
-                    <span class="text-[10px] uppercase tracking-widest text-blue-500 font-bold">SECURE VIEWPORT</span>
-                    <span class="text-[10px] text-slate-500 font-mono">INSCENE_STRATEGY_2026.WP</span>
-                </div>
-                <div id="scroll-container" class="overflow-y-auto p-12 uncopyable space-y-12 text-slate-300 leading-relaxed text-sm">
-                    
-                    <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">1. Executive Summary</h4>
-                        <p>inscene.io is a category-disrupting AI curator for the global stock footage industry. It replaces fragmented keyword-based search with a Narrative Thought Engine. By utilizing a "Paragraph-to-Shot" discovery interface and a unique Reasoning-Rebuttal Loop, the platform provides a high-utility collaborative workflow for professional editors while maintaining a zero-liability profile as a non-hosting intermediary `[1]`.</p>
-                    </section>
-
-                    <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">2. AI-First Discovery Interface: Paragraph-as-Thought</h4>
-                        <p>The platform operates as a single-entry, narrative-driven discovery tool. Unlike traditional RAG systems that rely on flat vector similarity, inscene.io employs a Situation Modeling approach via the NARRABENCH framework. The engine decomposes the paragraph into twelve narrative features across four dimensions: Story (agent motivations), Narration (perspective), Discourse (chronological chains), and Situatedness (social intent) `[1]`.</p>
-                    </section>
-
-                    <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">3. The Reasoning-Rebuttal Loop (XAI)</h4>
-                        <p>To meet Explainable AI (XAI) mandates, inscene.io implements a bilateral discovery process powered by Gemini 3's reasoning phase. Logic Receipts explain the semantic match by mapping input to Schankian Primitives (e.g., physical movement or abstract transfers). Thought Signatures preserve the reasoning state to prevent "context amnesia" during refinements, satisfying Article 14 of the EU AI Act `[1]`.</p>
-                    </section>
-
-                    <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">4. Multi-Provider Orchestration (MCP)</h4>
-                        <p>To maximize retrieval accuracy across fragmented global libraries, the platform utilizes a standardized integration layer. Agentic workflows are managed via Model Context Protocol (MCP) servers, allowing the registration of multiple provider endpoints (e.g., Shutterstock, Pond5) at initialization. We adopt the IPTC Video Metadata Hub v1.7 to normalize disparate data `[1]`.</p>
-                    </section>
-
-                    <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">5. The "Vault" Model & Security</h4>
-                        <p>To facilitate long-term improvement without "Black Box" risks, we utilize Audited Batch Learning (ABL). Anonymized user rebuttals are stored in "The Vault"—a secure graph store preserving the causal logic of expert corrections. The Vault is protected by Honeytoken Security patterns that trigger an immediate session kill-switch if accessed by a compromised agent `[1]`.</p>
-                    </section>
-
-                    <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">6. Marketplace Neutrality & Ranking</h4>
-                        <p>Our ranking formula ensures results are prioritized by relevance ($S$) and professional validation ($V$), not affiliate commission. The Redundancy Factor ($F_{Redundancy}$) acts as a neutrality guardrail that prevents any single provider from dominating results `[1, 2]`.</p>
-                    </section>
-
-                    <section>
-                        <h4 class="text-white font-black text-2xl mb-4 tracking-tighter">7. Revenue & Infrastructure Roadmap</h4>
-                        <p>The platform is designed for extreme economic sustainability, maintaining a sub-linear spend-to-revenue ratio. By routing 90% of traffic to local Gemma 4 models, we preserve margins while scaling to a capacity of 1.2 million daily queries by Year 5 `[1]`.</p>
-                    </section>
-
-                    <div class="py-20 text-center border-t border-slate-800">
-                        <p class="text-[10px] tracking-widest uppercase text-slate-600">End of Final Strategic Architecture Preview</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function toggleModal(id, show) {
-            const modal = document.getElementById(id);
-            if (show) {
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            } else {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-                document.getElementById('wp-form-step').classList.remove('hidden');
-                document.getElementById('wp-reader-step').classList.add('hidden');
-            }
-        }
-
-        function handleWhitepaperSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-
-            fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                body: formData
-            }).catch(err => console.log("Web3Forms submission backgrounded."));
-
-            document.getElementById('wp-form-step').classList.add('hidden');
-            document.getElementById('wp-reader-step').classList.remove('hidden');
-        }
-
-        const secureArea = document.getElementById('whitepaper-modal');
-        secureArea.addEventListener('copy', (e) => e.preventDefault());
-        secureArea.addEventListener('contextmenu', (e) => e.preventDefault());
-        
-        document.addEventListener('keydown', (e) => {
-            const isCmd = (e.ctrlKey |
-
-| e.metaKey);
-            if (isCmd && (e.key === 'c' |
-
-| e.key === 'p' |
-| e.key === 's')) {
-                e.preventDefault();
-            }
-        });
-    </script>
 </body>
 </html>
