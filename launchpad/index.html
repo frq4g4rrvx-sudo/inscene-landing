@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>inscene.io | AI-Driven Stock Footage Discovery</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
     <style>
         body { background-color: #000; overflow-x: hidden; }
         .pulsate-bg {
@@ -21,6 +24,10 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(51, 65, 85, 0.5);
         }
+        /* Custom scrollbar for the PDF viewer */
+        .pdf-container::-webkit-scrollbar { width: 8px; }
+        .pdf-container::-webkit-scrollbar-track { background: #0f172a; }
+        .pdf-container::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
     </style>
 </head>
 <body class="text-slate-200 font-sans selection:bg-blue-500/30">
@@ -33,9 +40,9 @@
             <a href="team" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-1 rounded-full hover:bg-slate-800 transition-all">
                 Team
             </a>
-            <a href="inscene.io-whitepaper-v3.2.pdf" target="_blank" rel="noopener noreferrer" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
+            <button onclick="openPDFViewer()" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
                 Whitepaper
-            </a>
+            </button>
         </div>
     </nav>
 
@@ -112,5 +119,139 @@
         <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
     </footer>
 
+    <div id="custom-pdf-viewer" class="hidden fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-start pt-6 pb-6 px-4" aria-modal="true" role="dialog">
+        
+        <div class="w-full max-w-4xl flex justify-between items-center bg-slate-900 border border-slate-700 p-4 rounded-t-xl shadow-lg">
+            <div class="text-white font-bold tracking-tight">inscene.io Whitepaper</div>
+            
+            <div class="flex items-center gap-4">
+                <button id="prev-page" class="text-sm bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                    ← Prev
+                </button>
+                <span class="text-sm text-slate-400">
+                    Page <span id="page-num" class="text-white font-bold">1</span> of <span id="page-count" class="text-white font-bold">--</span>
+                </span>
+                <button id="next-page" class="text-sm bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                    Next →
+                </button>
+            </div>
+
+            <button onclick="closePDFViewer()" class="text-slate-400 hover:text-white transition-colors" aria-label="Close Viewer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <div class="w-full max-w-4xl flex-1 bg-slate-800 border-x border-b border-slate-700 rounded-b-xl overflow-y-auto pdf-container flex justify-center p-4 shadow-2xl" oncontextmenu="return false;">
+            <canvas id="pdf-render" class="shadow-lg max-w-full h-auto bg-white"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Setup PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        const pdfUrl = 'inscene.io-whitepaper-v3.2.pdf';
+        
+        let pdfDoc = null,
+            pageNum = 1,
+            pageIsRendering = false,
+            pageNumIsPending = null;
+
+        const scale = 1.5, // Adjust for higher/lower resolution rendering
+              canvas = document.querySelector('#pdf-render'),
+              ctx = canvas.getContext('2d');
+
+        // Render the page
+        const renderPage = num => {
+            pageIsRendering = true;
+
+            // Get page
+            pdfDoc.getPage(num).then(page => {
+                // Set scale
+                const viewport = page.getViewport({ scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderCtx = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                page.render(renderCtx).promise.then(() => {
+                    pageIsRendering = false;
+
+                    if (pageNumIsPending !== null) {
+                        renderPage(pageNumIsPending);
+                        pageNumIsPending = null;
+                    }
+                });
+
+                // Output current page
+                document.querySelector('#page-num').textContent = num;
+                
+                // Update button states
+                document.querySelector('#prev-page').disabled = num <= 1;
+                document.querySelector('#next-page').disabled = num >= pdfDoc.numPages;
+            });
+        };
+
+        // Check for pages rendering
+        const queueRenderPage = num => {
+            if (pageIsRendering) {
+                pageNumIsPending = num;
+            } else {
+                renderPage(num);
+            }
+        };
+
+        // Show Prev Page
+        const showPrevPage = () => {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        };
+
+        // Show Next Page
+        const showNextPage = () => {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        };
+
+        // UI Handlers
+        const openPDFViewer = () => {
+            document.getElementById('custom-pdf-viewer').classList.remove('hidden');
+            // Load document if not already loaded
+            if(!pdfDoc) {
+                pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
+                    pdfDoc = pdfDoc_;
+                    document.querySelector('#page-count').textContent = pdfDoc.numPages;
+                    renderPage(pageNum);
+                }).catch(err => {
+                    // Display error if file is missing
+                    ctx.fillStyle = "black";
+                    ctx.font = "20px Arial";
+                    ctx.fillText("Error loading PDF: Make sure the file exists.", 50, 50);
+                });
+            }
+        };
+
+        const closePDFViewer = () => {
+            document.getElementById('custom-pdf-viewer').classList.add('hidden');
+        };
+
+        // Button Events
+        document.querySelector('#prev-page').addEventListener('click', showPrevPage);
+        document.querySelector('#next-page').addEventListener('click', showNextPage);
+        
+        // Handle Form Button Enable/Disable
+        const checkbox = document.getElementById('legal-consent');
+        const submitBtn = document.getElementById('join-beta-btn');
+        if(checkbox && submitBtn) {
+            checkbox.addEventListener('change', function() {
+                submitBtn.disabled = !this.checked;
+            });
+        }
+    </script>
 </body>
 </html>
