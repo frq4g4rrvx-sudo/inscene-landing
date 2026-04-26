@@ -5,208 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>inscene.io | AI-Driven Stock Footage Discovery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
     <style>
         body { background-color: #000; overflow-x: hidden; }
-        .pulsate-bg {
-            background: radial-gradient(circle at center, #001a4d 0%, #000 70%);
-            animation: pulse 8s infinite ease-in-out;
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
-        }
-        /* Custom scrollbar for the PDF viewer */
-        .pdf-container::-webkit-scrollbar { width: 8px; }
-        .pdf-container::-webkit-scrollbar-track { background: #0f172a; }
-        .pdf-container::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+        .pulsate-bg { background: radial-gradient(circle at center, #001a4d 0%, #000 70%); animation: pulse 8s infinite ease-in-out; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        .modal-overlay { background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); }
+        .no-copy-zone { -webkit-user-select: none; user-select: none; cursor: default; }
     </style>
 </head>
 <body class="text-slate-200 font-sans selection:bg-blue-500/30">
-
     <div class="pulsate-bg"></div>
-
-    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center" aria-label="Main Navigation">
+    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
         <div class="text-2xl font-black tracking-tighter text-white">inscene<span class="text-blue-500">.io</span></div>
         <div class="flex gap-4 items-center">
-            <a href="team" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-1 rounded-full hover:bg-slate-800 transition-all">
-                Team
-            </a>
-            <button onclick="openPDFViewer()" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
-                Whitepaper
-            </button>
+            <a href="team.html" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-1 rounded-full hover:bg-slate-800 transition-all">Team</a>
+            <button onclick="toggleModal('whitepaper-vault', true)" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">Whitepaper</button>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-20 text-center">
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Narrative-First <br/><span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent text-4xl md:text-6xl">Shot Discovery</span>
-        </h1>
-        <p class="text-lg text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Stop searching with keywords. Start finding stock footage with intent.<br/>Our AI-powered <strong class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">NARRABENCH framework</strong> uses deep reasoning to retrieve the exact shots your story demands.
-        </p>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">Narrative-First <br/><span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Shot Discovery</span></h1>
+        </main>
 
-        <div class="glass-panel p-6 rounded-2xl max-w-xl mx-auto shadow-2xl text-left">
-            <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
-                <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
-                <input type="hidden" name="subject" value="New Beta Signup for inscene.io">
-                <input type="hidden" name="redirect" value="https://www.inscene.io/thanks">
-       
-                <p class="text-[14px] md:text-[12px] text-slate-400 leading-relaxed" role="note">
-                    <strong class="text-slate-300">Notice:</strong> You are interacting with the inscene.io's Narrative Thought Engine, an AI system. By signing up, you acknowledge that misuse of this engine to discover or utilize media for the purpose of creating deepfakes, non-consensual intimate imagery (NCII), or any illegal material is strictly prohibited. Misuse will result in immediate account termination and, where required by law, the disclosure of your identity to authorities.
-                </p>
-
-                <div class="flex items-start gap-3 mb-2">
-                    <input type="checkbox" id="legal-consent" name="legal_consent" aria-required="true" 
-                           class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-900/50 text-blue-600 focus:ring-blue-500 focus:ring-offset-slate-900">
-                    
-                    <label for="legal-consent" class="text-sm text-slate-300">
-                        I have read and agree to the <a href="/terms" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
-                    </label>
+    <div id="whitepaper-vault" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="glass-panel max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col rounded-3xl relative">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/40">
+                <h2 class="text-xl font-bold text-white">Strategic Whitepaper v3.2 [cite: 1]</h2>
+                <button onclick="toggleModal('whitepaper-vault', false)" class="text-slate-500 hover:text-white">&times;</button>
+            </div>
+            <div id="protected-content" class="p-8 overflow-y-auto no-copy-zone space-y-6 text-sm text-slate-300">
+                <p><strong>NARRABENCH Framework:</strong> Our Neuro-Symbolic GraphRAG treats Situatedness and Discourse as primary variables[cite: 10].</p>
                 </div>
-
-                <div class="flex flex-col md:flex-row gap-2">
-                    <label for="beta-email" class="sr-only">Email Address</label>
-                    <input type="email" id="beta-email" name="email" required placeholder="your@email.com" 
-                        class="bg-slate-900/50 border border-slate-700 px-5 py-4 rounded-xl focus:outline-none focus:border-blue-500 w-full text-white transition-colors">
-                    
-                    <button type="submit" id="join-beta-btn" disabled 
-                            class="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-xl transition-all whitespace-nowrap">
-                        Join Beta
-                    </button>
-                </div>
-            </form>
         </div>
-        <p class="text-xs text-slate-500 mt-4 italic">Limited spots available for Q3 2026 closed testing.</p>
-    </main>
-
-    <section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8" aria-label="Platform Features">
-        <div class="glass-panel p-8 rounded-3xl">
-            <div class="text-blue-500 mb-4" aria-hidden="true">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-2">Paragraph-as-Thought</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across the biggest stock footage libraries.</p>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-            <div class="text-blue-500 mb-4" aria-hidden="true">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-2">XAI Logic Receipts</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates.</p>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-            <div class="text-blue-500 mb-4" aria-hidden="true">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-2">Reasoning-Rebuttal</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly.</p>
-        </div>
-    </section>
-
-    <footer class="py-12 px-6 text-center border-t border-slate-900 space-y-4">
-        <p class="text-[14px] md:text-[12px] text-slate-500 max-w-2xl mx-auto">
-            <strong class="text-slate-400">Marketplace Neutrality Guaranteed:</strong> inscene.io search results are prioritized by creative alignment and provenance, not affiliate commission rates.
-        </p>
-        <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
-    </footer>
-
-    <div id="custom-pdf-viewer" class="hidden fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-start pt-6 pb-6 px-4" aria-modal="true" role="dialog">
-        
-        <div class="w-full max-w-4xl flex justify-between items-center bg-slate-900 border border-slate-700 p-4 rounded-t-xl shadow-lg shrink-0">
-            <div class="text-white font-bold tracking-tight">inscene.io Whitepaper</div>
-            
-            <button onclick="closePDFViewer()" class="text-slate-400 hover:text-white transition-colors" aria-label="Close Viewer">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-        </div>
-
-        <div id="pdf-scroll-container" class="w-full max-w-4xl flex-1 bg-slate-800 border-x border-b border-slate-700 rounded-b-xl overflow-y-auto pdf-container flex flex-col items-center p-6 shadow-2xl gap-6 relative" oncontextmenu="return false;">
-            </div>
     </div>
 
+    <footer class="py-12 px-6 text-center border-t border-slate-900 space-y-4">
+        <p class="text-xs text-slate-500">Marketplace Neutrality Guaranteed per March 2026 FTC Guidelines[cite: 34].</p>
+        <div class="text-xs text-slate-600 flex justify-center gap-6">
+            <span>© 2026 inscene.io</span>
+            <a href="privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
+            <a href="terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+        </div>
+    </footer>
+
     <script>
-        // Setup PDF.js worker
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-        const pdfUrl = 'inscene.io-whitepaper-v3.2.pdf';
-        
-        let pdfDoc = null;
-        const scale = 1.5; // Adjust for higher/lower resolution rendering
-        const container = document.getElementById('pdf-scroll-container');
-
-        // Function to render a single page and append it to the container
-        const renderPage = (num) => {
-            pdfDoc.getPage(num).then(page => {
-                const viewport = page.getViewport({ scale });
-                
-                // 1. Create a new canvas element for this specific page
-                const canvas = document.createElement('canvas');
-                // 2. Apply Tailwind classes to style the individual page
-                canvas.className = 'shadow-2xl max-w-full h-auto bg-white shrink-0';
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-                
-                // 3. Append the canvas to our scrolling container
-                container.appendChild(canvas);
-                
-                // 4. Render the PDF page onto this new canvas
-                const ctx = canvas.getContext('2d');
-                const renderCtx = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-                
-                page.render(renderCtx);
-            });
-        };
-
-        // UI Handlers
-        const openPDFViewer = () => {
-            document.getElementById('custom-pdf-viewer').classList.remove('hidden');
-            
-            // Only load and render if we haven't already
-            if(!pdfDoc) {
-                // Show a brief loading text
-                container.innerHTML = '<div id="loading-msg" class="text-slate-400 mt-10 animate-pulse">Decrypting strategic architecture...</div>';
-
-                pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
-                    pdfDoc = pdfDoc_;
-                    
-                    // Clear the loading message
-                    container.innerHTML = '';
-                    
-                    // Loop through ALL pages in the PDF and render them sequentially
-                    for (let i = 1; i <= pdfDoc.numPages; i++) {
-                        renderPage(i);
-                    }
-                }).catch(err => {
-                    // Display error if file is missing
-                    container.innerHTML = '<div class="text-red-400 mt-10">Error loading PDF: Make sure the file exists in the repository.</div>';
-                });
-            }
-        };
-
-        const closePDFViewer = () => {
-            document.getElementById('custom-pdf-viewer').classList.add('hidden');
-        };
-        
-        // Handle Form Button Enable/Disable
-        const checkbox = document.getElementById('legal-consent');
-        const submitBtn = document.getElementById('join-beta-btn');
-        if(checkbox && submitBtn) {
-            checkbox.addEventListener('change', function() {
-                submitBtn.disabled = !this.checked;
-            });
+        function toggleModal(id, show) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden', !show);
+            document.body.style.overflow = show ? 'hidden' : 'auto';
         }
+        document.getElementById('protected-content').addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
 </html>
