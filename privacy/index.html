@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | inscene.io</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #000; overflow-x: hidden; }
+        .pulsate-bg {
+            background: radial-gradient(circle at center, #001a4d 0%, #000 70%);
+            animation: pulse 8s infinite ease-in-out;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+    </style>
+</head>
+<body class="text-slate-200 font-sans selection:bg-blue-500/30">
+
+    <div class="pulsate-bg"></div>
+
+    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center" aria-label="Main Navigation">
+        <div class="text-2xl font-black tracking-tighter text-white">
+            <a href="/">inscene<span class="text-blue-500">.io</span></a>
+        </div>
+        <div class="flex gap-4 items-center">
+            <a href="/" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-2 rounded-full hover:bg-slate-800 hover:text-white transition-all">
+                &larr; Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <article class="glass-panel p-8 md:p-12 rounded-3xl shadow-2xl">
+            <header class="mb-10 border-b border-slate-800 pb-8">
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+                    Privacy <span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Policy</span>
+                </h1>
+                <p class="text-sm text-slate-500 uppercase tracking-widest font-semibold">Effective Date: [Insert Date]</p>
+            </header>
+
+            <div class="space-y-10 text-slate-400 leading-relaxed text-sm md:text-base">
+                <section aria-labelledby="entity-scope">
+                    <h2 id="entity-scope" class="text-xl font-bold text-white mb-3">Entity Identification & Scope</h2>
+                    <p>inscene.io (the "Company") acts as the Data Fiduciary under the India Digital Personal Data Protection (DPDP) Act 2023 and the Data Controller under the GDPR. At this beta stage, we collect only your name and email address for waitlist management and service communication.</p>
+                </section>
+
+                <section aria-labelledby="ai-handling">
+                    <h2 id="ai-handling" class="text-xl font-bold text-white mb-3">AI-Specific Data Handling: Edge Sanitization</h2>
+                    <p>To ensure "Data Protection by Design," the Company utilizes Edge Sanitization Routing. Personally Identifiable Information (PII) and creative briefs are processed locally via on-device deployments; only anonymized, abstract semantic vectors are scaled to our cloud for discovery reasoning.</p>
+                </section>
+
+                <section aria-labelledby="compliance-vault">
+                    <h2 id="compliance-vault" class="text-xl font-bold text-white mb-3">The Sovereign Compliance Vault</h2>
+                    <p>While raw media pixels are ephemeral and flushed from memory post-inference, the Company maintains a Sovereign Compliance Vault. This vault secures reasoning traces and "Logic Receipts"—cryptographic records of system reasoning—for the mandatory window required by the 2026 IT Rules in India and transparency mandates in the EU.</p>
+                </section>
+
+                <section aria-labelledby="data-rights">
+                    <h2 id="data-rights" class="text-xl font-bold text-white mb-3">Data Principal Rights & Erasure</h2>
+                    <p>Under the DPDP Act and GDPR, you have the absolute Right to Erasure. Valid requests for the deletion of your personal data will be fulfilled within 7 days, subject to our statutory legal obligations to maintain reasoning traces for law enforcement.</p>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="py-12 px-6 text-center border-t border-slate-900 mt-12">
+        <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
+    </footer>
+
+</body>
+</html>
