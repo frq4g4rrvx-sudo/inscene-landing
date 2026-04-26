@@ -22,21 +22,8 @@
             border: 1px solid rgba(51, 65, 85, 0.5);
         }
         .modal-overlay {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(8px);
-        }
-        /* Anti-Copy Protections */
-        .no-copy-zone {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            cursor: default;
-        }
-        /* Visual Mesh to deter OCR/Screenshots */
-        .secure-mesh {
-            background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
-            background-size: 10px 10px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
         }
     </style>
 </head>
@@ -50,8 +37,8 @@
             <a href="team" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-1 rounded-full hover:bg-slate-800 transition-all">
                 Team
             </a>
-            <button onclick="toggleModal('whitepaper-vault', true)" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
-                Whitepaper v3.2
+            <button onclick="toggleModal('whitepaper-modal', true)" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
+                Whitepaper
             </button>
         </div>
     </nav>
@@ -65,18 +52,88 @@
         </p>
 
         <div class="glass-panel p-6 rounded-2xl max-w-xl mx-auto shadow-2xl text-left">
-            <form id="beta-form" action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
+            <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
                 <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
                 <input type="hidden" name="subject" value="New Beta Signup for inscene.io">
+                <input type="hidden" name="redirect" value="https://www.inscene.io/thanks">
                 
-                <p class="text-[14px] md:text-[12px] text-slate-400 leading-relaxed">
-                    <strong class="text-slate-300">Notice:</strong> You are interacting with the inscene.io Narrative Thought Engine. Misuse for deepfakes or illegal material is strictly prohibited.
+                <p class="text-[14px] md:text-[12px] text-slate-400 leading-relaxed" role="note">
+                    <strong class="text-slate-300">Notice:</strong> You are interacting with the inscene.io Narrative Thought Engine, an AI system. By signing up, you acknowledge that misuse of this engine to discover or utilize media for the purpose of creating deepfakes, non-consensual intimate imagery (NCII), or any illegal material is strictly prohibited. Misuse will result in immediate account termination and, where required by law, the disclosure of your identity to authorities.
                 </p>
 
                 <div class="flex items-start gap-3 mb-2">
-                    <input type="checkbox" id="legal-consent" required class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-900/50 text-blue-600">
-                    <label for="legal-consent" class="text-sm text-slate-300">I agree to the Terms and Privacy Policy.</label>
+                    <input type="checkbox" id="legal-consent" name="legal_consent" aria-required="true" 
+                           class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-900/50 text-blue-600 focus:ring-blue-500 focus:ring-offset-slate-900">
+                    <label for="legal-consent" class="text-sm text-slate-300">
+                        I have read and agree to the <a href="/terms" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+                    </label>
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-2">
-                    <input type="email" name="email" required placeholder="your@email.com" class="bg-slate-900/50 border border-slate-7
+                    <label for="beta-email" class="sr-only">Email Address</label>
+                    <input type="email" id="beta-email" name="email" required placeholder="your@email.com" 
+                        class="bg-slate-900/50 border border-slate-700 px-5 py-4 rounded-xl focus:outline-none focus:border-blue-500 w-full text-white transition-colors">
+                    
+                    <button type="submit" id="join-beta-btn" disabled 
+                            class="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-xl transition-all whitespace-nowrap">
+                        Join Beta
+                    </button>
+                </div>
+            </form>
+        </div>
+        <p class="text-xs text-slate-500 mt-4 italic">Limited spots available for Q3 2026 closed testing.</p>
+    </main>
+
+    <section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8" aria-label="Platform Features">
+        <div class="glass-panel p-8 rounded-3xl">
+            <div class="text-blue-500 mb-4" aria-hidden="true">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Paragraph-as-Thought</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across the biggest stock footage libraries.</p>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+            <div class="text-blue-500 mb-4" aria-hidden="true">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">XAI Logic Receipts</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates.</p>
+        </div>
+        <div class="glass-panel p-8 rounded-3xl">
+            <div class="text-blue-500 mb-4" aria-hidden="true">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Reasoning-Rebuttal</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly.</p>
+        </div>
+    </section>
+
+    <footer class="py-12 px-6 text-center border-t border-slate-900 space-y-4">
+        <p class="text-[14px] md:text-[12px] text-slate-500 max-w-2xl mx-auto">
+            <strong class="text-slate-400">Marketplace Neutrality Guaranteed:</strong> inscene.io search results are prioritized by creative alignment and provenance, not affiliate commission rates.
+        </p>
+        <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
+    </footer>
+
+    <div id="whitepaper-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+        <div class="glass-panel max-w-md w-full p-8 rounded-3xl relative shadow-2xl">
+            <button onclick="toggleModal('whitepaper-modal', false)" class="absolute top-4 right-4 text-slate-500 hover:text-white" aria-label="Close modal">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h2 id="modal-title" class="text-2xl font-bold text-white mb-2">Strategic Whitepaper</h2>
+            <p class="text-sm text-slate-400 mb-6 leading-relaxed">Enter your details to receive the 2026 strategic architecture directly in your inbox.</p>
+            
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
+                <input type="hidden" name="subject" value="Whitepaper Request from inscene.io">
+                <input type="hidden" name="redirect" value="https://www.inscene.io/thanks">
+                
+                <div class="space-y-2 text-left">
+                    <label for="wp-name" class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Full Name</label>
+                    <input type="text" id="wp-name" name="name" required placeholder="John Doe" 
+                        class="w-full bg-slate-900/50 border border-slate-700 px-5 py-3 rounded-xl focus:outline-none focus:border-blue-500 text-white">
+                </div>
+                <div class="space-y-2 text-left">
+                    <label for="wp-email" class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Work Email</label>
+                    <input type="email" id="wp-email" name="email" required placeholder="john@company.com" 
+                        class="w-full bg-slate
