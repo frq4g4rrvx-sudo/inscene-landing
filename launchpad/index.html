@@ -3,137 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>inscene.io | AI-Driven Stock Footage Discovery</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #000; overflow-x: hidden; }
-        .pulsate-bg {
-            background: radial-gradient(circle at center, #001a4d 0%, #000 70%);
-            animation: pulse 8s infinite ease-in-out;
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(51, 65, 85, 0.5);
-        }
-        .modal-overlay {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-        }
-    </style>
+    <title>inscene.io | Narrative Thought Engine</title>
 </head>
-<body class="text-slate-200 font-sans selection:bg-blue-500/30">
+<body>
 
-    <div class="pulsate-bg"></div>
+  <header class="hero">
+    <h1>The End of the "Keyword Tax"</h1>
+    <p>Disrupting the $5B stock industry with Narrative Intelligence[cite: 3, 5].</p>
+    <div class="cta-group">
+      <button class="btn-main">Get Started</button>
+      <button id="openWhitepaper" class="btn-secondary">
+        Read Whitepaper (v3.2)
+      </button>
+    </div>
+  </header>
 
-    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center" aria-label="Main Navigation">
-        <div class="text-2xl font-black tracking-tighter text-white">inscene<span class="text-blue-500">.io</span></div>
-        <div class="flex gap-4 items-center">
-            <a href="team" class="text-xs uppercase tracking-widest text-slate-500 font-semibold border border-slate-800 px-4 py-1 rounded-full hover:bg-slate-800 transition-all">
-                Team
-            </a>
-            <button onclick="toggleModal('whitepaper-modal', true)" class="text-xs uppercase tracking-widest text-white font-semibold bg-blue-600 px-4 py-1 rounded-full hover:bg-blue-500 transition-all">
-                Whitepaper
-            </button>
-        </div>
-    </nav>
+  <div id="paperModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content secure-container">
+      <nav class="modal-header">
+        <span>Strategic Update: April 25, 2026 [cite: 1]</span>
+        <button id="closeModal" class="close-btn">&times; Close</button>
+      </nav>
+      
+      <article id="whitepaper-content" class="unselectable-text">
+        <header>
+          <h1>inscene.io: Narrative Thought Engine for Stock Discovery [cite: 1]</h1>
+          <p class="compliance-tag">Regulatory Alignment: EU AI Act & India IT Rules 2026 [cite: 2]</p>
+        </header>
 
-    <main class="max-w-4xl mx-auto px-6 py-20 text-center">
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Narrative-First <br/><span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent text-4xl md:text-6xl">Shot Discovery</span>
-        </h1>
-        <p class="text-lg text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Stop searching with keywords. Start finding stock footage with intent.<br/>Our AI-powered <strong class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">NARRABENCH framework</strong> uses deep reasoning to retrieve the exact shots your story demands.
-        </p>
+        <section>
+          <h2>1. Executive Summary</h2>
+          <p>Creative professionals currently lose 40% of billable hours to inefficient keyword translation [cite: 4]. inscene.io establishes a "Clean Supply Chain" for professional media via a Zero-Trust Ingestion pipeline[cite: 6].</p>
+        </section>
 
-        <div class="glass-panel p-6 rounded-2xl max-w-xl mx-auto shadow-2xl text-left">
-            <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
-                <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
-                <input type="hidden" name="subject" value="New Beta Signup for inscene.io">
-                <input type="hidden" name="redirect" value="https://www.inscene.io/thanks">
-                
-                <p class="text-[14px] md:text-[12px] text-slate-400 leading-relaxed" role="note">
-                    <strong class="text-slate-300">Notice:</strong> You are interacting with the inscene.io Narrative Thought Engine, an AI system. By signing up, you acknowledge that misuse of this engine to discover or utilize media for the purpose of creating deepfakes, non-consensual intimate imagery (NCII), or any illegal material is strictly prohibited. Misuse will result in immediate account termination and, where required by law, the disclosure of your identity to authorities.
-                </p>
+        <section>
+          <h2>2. The Core Moat: NARRABENCH</h2>
+          <p>We treat creative prompts as multidimensional thoughts via Traceable Ephemeral Inference[cite: 8]. Our Neuro-Symbolic GraphRAG prioritizes Situatedness (social intent) and Discourse over flat vector similarity[cite: 10].</p>
+        </section>
 
-                <div class="flex items-start gap-3 mb-2">
-                    <input type="checkbox" id="legal-consent" name="legal_consent" aria-required="true" 
-                           class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-900/50 text-blue-600 focus:ring-blue-500 focus:ring-offset-slate-900">
-                    <label for="legal-consent" class="text-sm text-slate-300">
-                        I have read and agree to the <a href="/terms" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy" class="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
-                    </label>
-                </div>
+        <section>
+          <h2>3. Agentic Workflow</h2>
+          <p>The "Top 9 Bounded UI" eliminates discovery fatigue by providing a Logic Receipt that explains the system's reasoning for each selection[cite: 17].</p>
+        </section>
 
-                <div class="flex flex-col md:flex-row gap-2">
-                    <label for="beta-email" class="sr-only">Email Address</label>
-                    <input type="email" id="beta-email" name="email" required placeholder="your@email.com" 
-                        class="bg-slate-900/50 border border-slate-700 px-5 py-4 rounded-xl focus:outline-none focus:border-blue-500 w-full text-white transition-colors">
-                    
-                    <button type="submit" id="join-beta-btn" disabled 
-                            class="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-xl transition-all whitespace-nowrap">
-                        Join Beta
-                    </button>
-                </div>
-            </form>
-        </div>
-        <p class="text-xs text-slate-500 mt-4 italic">Limited spots available for Q3 2026 closed testing.</p>
-    </main>
+        <section>
+            <h2>4. Revenue Model & Neutrality</h2>
+            <p>Our ranking logic is governed by the following vendor-agnostic formula[cite: 35]:</p>
+            <p>
+              $$\text{Priority} = \frac{f(S, V) \times P_a}{R_f}$$
+            </p>
+            <p>Where $S$ is Situatedness, $V$ is Professional Validation, $R_f$ is the Redundancy Factor, and $P_a$ is the Provenance Authenticity Multiplier[cite: 38].</p>
+        </section>
 
-    <section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8" aria-label="Platform Features">
-        <div class="glass-panel p-8 rounded-3xl">
-            <div class="text-blue-500 mb-4" aria-hidden="true">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-2">Paragraph-as-Thought</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Input narrative prose. We decompose it into 12 narrative dimensions to find specific stock clips across the biggest stock footage libraries.</p>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-            <div class="text-blue-500 mb-4" aria-hidden="true">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-2">XAI Logic Receipts</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Every footage result comes with an auditable logic path. 100% transparency aligned with 2026 regulatory mandates.</p>
-        </div>
-        <div class="glass-panel p-8 rounded-3xl">
-            <div class="text-blue-500 mb-4" aria-hidden="true">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-2">Reasoning-Rebuttal</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">A Human-in-the-Loop interface. Rebut the AI's logic to refine your footage search instantly.</p>
-        </div>
-    </section>
+        <section>
+          <h2>5. Market Projection</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Phase</th>
+                <th>Projected Revenue (20% Comm.)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2026</td>
+                <td>Public Beta [cite: 44]</td>
+                <td>$180,000 [cite: 44]</td>
+              </tr>
+              <tr>
+                <td>2028</td>
+                <td>EU Expansion [cite: 44]</td>
+                <td>$1,080,000 [cite: 44]</td>
+              </tr>
+              <tr>
+                <td>2030</td>
+                <td>Market Maturity [cite: 44]</td>
+                <td>$4,200,000 [cite: 44]</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </article>
+    </div>
+  </div>
 
-    <footer class="py-12 px-6 text-center border-t border-slate-900 space-y-4">
-        <p class="text-[14px] md:text-[12px] text-slate-500 max-w-2xl mx-auto">
-            <strong class="text-slate-400">Marketplace Neutrality Guaranteed:</strong> inscene.io search results are prioritized by creative alignment and provenance, not affiliate commission rates.
-        </p>
-        <p class="text-xs text-slate-600">© 2026 inscene.io. Architecture compliant with EU AI Act Art. 12 & 13. Powered by Gemini 3.</p>
-    </footer>
-
-    <div id="whitepaper-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay" aria-modal="true" role="dialog" aria-labelledby="modal-title">
-        <div class="glass-panel max-w-md w-full p-8 rounded-3xl relative shadow-2xl">
-            <button onclick="toggleModal('whitepaper-modal', false)" class="absolute top-4 right-4 text-slate-500 hover:text-white" aria-label="Close modal">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-            <h2 id="modal-title" class="text-2xl font-bold text-white mb-2">Strategic Whitepaper</h2>
-            <p class="text-sm text-slate-400 mb-6 leading-relaxed">Enter your details to receive the 2026 strategic architecture directly in your inbox.</p>
-            
-            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-                <input type="hidden" name="access_key" value="adbc07a6-eab6-4ba6-8063-3b601b8a815c">
-                <input type="hidden" name="subject" value="Whitepaper Request from inscene.io">
-                <input type="hidden" name="redirect" value="https://www.inscene.io/thanks">
-                
-                <div class="space-y-2 text-left">
-                    <label for="wp-name" class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Full Name</label>
-                    <input type="text" id="wp-name" name="name" required placeholder="John Doe" 
-                        class="w-full bg-slate-900/50 border border-slate-700 px-5 py-3 rounded-xl focus:outline-none focus:border-blue-500 text-white">
-                </div>
-                <div class="space-y-2 text-left">
-                    <label for="wp-email" class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-1">Work Email</label>
-                    <input type="email" id="wp-email" name="email" required placeholder="john@company.com" 
-                        class="w-full bg-slate
+</body>
+</html>
