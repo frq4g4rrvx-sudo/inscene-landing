@@ -121,29 +121,16 @@
 
     <div id="custom-pdf-viewer" class="hidden fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-start pt-6 pb-6 px-4" aria-modal="true" role="dialog">
         
-        <div class="w-full max-w-4xl flex justify-between items-center bg-slate-900 border border-slate-700 p-4 rounded-t-xl shadow-lg">
+        <div class="w-full max-w-4xl flex justify-between items-center bg-slate-900 border border-slate-700 p-4 rounded-t-xl shadow-lg shrink-0">
             <div class="text-white font-bold tracking-tight">inscene.io Whitepaper</div>
             
-            <div class="flex items-center gap-4">
-                <button id="prev-page" class="text-sm bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-                    ← Prev
-                </button>
-                <span class="text-sm text-slate-400">
-                    Page <span id="page-num" class="text-white font-bold">1</span> of <span id="page-count" class="text-white font-bold">--</span>
-                </span>
-                <button id="next-page" class="text-sm bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-                    Next →
-                </button>
-            </div>
-
             <button onclick="closePDFViewer()" class="text-slate-400 hover:text-white transition-colors" aria-label="Close Viewer">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
         </div>
 
-        <div class="w-full max-w-4xl flex-1 bg-slate-800 border-x border-b border-slate-700 rounded-b-xl overflow-y-auto pdf-container flex justify-center p-4 shadow-2xl" oncontextmenu="return false;">
-            <canvas id="pdf-render" class="shadow-lg max-w-full h-auto bg-white"></canvas>
-        </div>
+        <div id="pdf-scroll-container" class="w-full max-w-4xl flex-1 bg-slate-800 border-x border-b border-slate-700 rounded-b-xl overflow-y-auto pdf-container flex flex-col items-center p-6 shadow-2xl gap-6 relative" oncontextmenu="return false;">
+            </div>
     </div>
 
     <script>
@@ -152,86 +139,58 @@
 
         const pdfUrl = 'inscene.io-whitepaper-v3.2.pdf';
         
-        let pdfDoc = null,
-            pageNum = 1,
-            pageIsRendering = false,
-            pageNumIsPending = null;
+        let pdfDoc = null;
+        const scale = 1.5; // Adjust for higher/lower resolution rendering
+        const container = document.getElementById('pdf-scroll-container');
 
-        const scale = 1.5, // Adjust for higher/lower resolution rendering
-              canvas = document.querySelector('#pdf-render'),
-              ctx = canvas.getContext('2d');
-
-        // Render the page
-        const renderPage = num => {
-            pageIsRendering = true;
-
-            // Get page
+        // Function to render a single page and append it to the container
+        const renderPage = (num) => {
             pdfDoc.getPage(num).then(page => {
-                // Set scale
                 const viewport = page.getViewport({ scale });
+                
+                // 1. Create a new canvas element for this specific page
+                const canvas = document.createElement('canvas');
+                // 2. Apply Tailwind classes to style the individual page
+                canvas.className = 'shadow-2xl max-w-full h-auto bg-white shrink-0';
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
-
+                
+                // 3. Append the canvas to our scrolling container
+                container.appendChild(canvas);
+                
+                // 4. Render the PDF page onto this new canvas
+                const ctx = canvas.getContext('2d');
                 const renderCtx = {
                     canvasContext: ctx,
                     viewport: viewport
                 };
-
-                page.render(renderCtx).promise.then(() => {
-                    pageIsRendering = false;
-
-                    if (pageNumIsPending !== null) {
-                        renderPage(pageNumIsPending);
-                        pageNumIsPending = null;
-                    }
-                });
-
-                // Output current page
-                document.querySelector('#page-num').textContent = num;
                 
-                // Update button states
-                document.querySelector('#prev-page').disabled = num <= 1;
-                document.querySelector('#next-page').disabled = num >= pdfDoc.numPages;
+                page.render(renderCtx);
             });
-        };
-
-        // Check for pages rendering
-        const queueRenderPage = num => {
-            if (pageIsRendering) {
-                pageNumIsPending = num;
-            } else {
-                renderPage(num);
-            }
-        };
-
-        // Show Prev Page
-        const showPrevPage = () => {
-            if (pageNum <= 1) return;
-            pageNum--;
-            queueRenderPage(pageNum);
-        };
-
-        // Show Next Page
-        const showNextPage = () => {
-            if (pageNum >= pdfDoc.numPages) return;
-            pageNum++;
-            queueRenderPage(pageNum);
         };
 
         // UI Handlers
         const openPDFViewer = () => {
             document.getElementById('custom-pdf-viewer').classList.remove('hidden');
-            // Load document if not already loaded
+            
+            // Only load and render if we haven't already
             if(!pdfDoc) {
+                // Show a brief loading text
+                container.innerHTML = '<div id="loading-msg" class="text-slate-400 mt-10 animate-pulse">Decrypting strategic architecture...</div>';
+
                 pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
                     pdfDoc = pdfDoc_;
-                    document.querySelector('#page-count').textContent = pdfDoc.numPages;
-                    renderPage(pageNum);
+                    
+                    // Clear the loading message
+                    container.innerHTML = '';
+                    
+                    // Loop through ALL pages in the PDF and render them sequentially
+                    for (let i = 1; i <= pdfDoc.numPages; i++) {
+                        renderPage(i);
+                    }
                 }).catch(err => {
                     // Display error if file is missing
-                    ctx.fillStyle = "black";
-                    ctx.font = "20px Arial";
-                    ctx.fillText("Error loading PDF: Make sure the file exists.", 50, 50);
+                    container.innerHTML = '<div class="text-red-400 mt-10">Error loading PDF: Make sure the file exists in the repository.</div>';
                 });
             }
         };
@@ -239,10 +198,6 @@
         const closePDFViewer = () => {
             document.getElementById('custom-pdf-viewer').classList.add('hidden');
         };
-
-        // Button Events
-        document.querySelector('#prev-page').addEventListener('click', showPrevPage);
-        document.querySelector('#next-page').addEventListener('click', showNextPage);
         
         // Handle Form Button Enable/Disable
         const checkbox = document.getElementById('legal-consent');
